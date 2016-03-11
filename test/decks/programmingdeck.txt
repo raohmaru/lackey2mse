@@ -1,0 +1,40 @@
+Name	Set	ImageFile	Type	CornerValue	Text	FlavorText	Creator
+User-Friendly Interface	programming	thing_feature	Thing - Feature				Raven
+3D Graphics	programming	thing_feature	Thing - Feature				Kevan
+SMS Messaging	programming	thing_feature	Thing - Feature				Kevan
+"Extra Gore" Setting	programming	thing_feature	Thing - Feature				Kevan
+Urgent Security Fix	programming	action	Action		Remove a Security Bug. Roll a D6 and subtract 3; Players take turns in playing Bugs from their hand onto your Software to that count.		Nik
+Typo	programming	thing_bug	Thing - Bug		You may take an action to destroy Typo.		Kevan
+Autosave	programming	thing_feature	Thing - Feature		You may discard a card to prevent any of your Features from being destroyed by any effect.		Tyrethali
+Missing Squiggly Bracket	programming	thing_bug	Thing - Bug		You may not play further Features.		Raven
+Security Bug	programming	thing_bug	Thing - Bug		While in play, each Player may use their Action to flip a coin; heads, destroy a Feature, tails, play a Bug on your Software.		Nik
+Annoying Sounds	programming	thing	Thing		May be played as a Feature or a Bug.		Tyrethali
+Under Pressure	programming	action	Action		Draw a card for each Bug your Software has.		Kevan
+Open Source	programming	thing_feature	Thing - Feature		Any Opponent may take an Action to play a Bug onto your Software. Action: Destroy a Bug in your Software.		Kevan
+3 AM Coding Marathon	programming	action	Action		Draw and reveal five cards. Put all Features and Bugs into play under your control. Discard the rest.		Tyrethali
+Virus	programming	thing_bug	Thing - Bug		When you destroy Virus, you may give control of it to an opponent.		Kevan
+Pizza and Soda	programming	action	Action		Draw two cards. You may play one extra card of any type this turn.		Tyrethali
+Creature Feep	programming	action	Action		Draw a card. Play all Features and Bugs in your hand onto your Software.		Nik
+Testing Stage	programming	action	Action		Each Player draws a card for each Feature they control, then discard a card at random for each Bug they control.		Tyrethali
+Evasive Error Messages	programming	thing_feature	Thing - Feature		You may ignore one of your Bugs when determining victory.		Kevan
+Temporary Fix	programming	action	Action		Return any Bug in play to an opponent's hand.		Tyrethali
+Overnight Self-Repair	programming	action	Action		Each Player may destroy 'x' Bugs, where 'x' is the number of Bugs in the least-buggy piece of Software.		Kevan
+White Hat	programming	action	Action		Each Player flips a coin; heads, they may remove a Bug from their Software.		Nik
+Black Hat	programming	action	Action		Each Player must play a Bug from their hand onto their Software, or discard a card at random.		Nik
+New Team Lead	programming	action	Action		A selected opponent misses their turn.		Raven
+Care and Attention	programming	action	Action		Choose a Player - they must reveal their hand, and discard all Bugs from it.		Kevan
+Market Forces	programming	action	Action		Destroy a Feature.		Kevan
+Skinning	programming	thing_feature	Thing - Feature		If you have any Bugs in your hand, you must playone onto your own Software when you play this.		Raven
+Out of Memory	programming	thing_bug	Thing - Bug		Whenever you play a Feature, destroy a Feature you control.		Kevan
+Abandon Ship	programming	action	Action		Destroy any number of Features you control. Destroy an equal number of Bugs.		Kevan
+Buyout	programming	action	Action		Destroy all Features and Bugs you control. Put one Feature into play from your hand, if you have one.		Raven
+Feature Freeze	programming	action	Action		No Features or Bugs may be played on a chosen Player for 2 turns.		Nik
+Easter Egg	programming	thing_feature	Thing - Feature				Tyrethali
+Spell-Checker	programming	thing_feature	Thing - Feature				Kevan
+Assembly Guru	programming	thing_feature	Thing - Feature		Tiny, fast product! When played, draw a card		Nik
+Useful Online Documentation	programming	thing_feature	Thing - Feature				Raven
+Self-Correcting AI	programming	thing_feature	Thing - Feature		Play only if there are no Bugs in your code. You may not play Bugs, and Bugs may not be played on you.		Tyrethali
+Carefully Documented Development	programming	thing_feature	Thing - Feature		You must use an Action when you play a Feature. You may use an Action to draw a card.		Raven
+Enthusiastic Paper-Clip	programming	thing_feature	Thing - Feature		When you play this card, discard your hand out of shame.		Kevan
+Disasterous Design Flaws	programming	thing_bug	Thing - Bug		Action: Destroy one of your Features, to destroy this card.		Kevan
+File Not Found	programming	thing_bug	Thing - Bug		When you play a Feature, you may destroy this card.		Kevan

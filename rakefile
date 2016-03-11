@@ -1,0 +1,60 @@
+require 'rake/clean'
+require 'rake/testtask'
+
+CLEAN.include ['bin/*.log', 'lib/*.exy']
+CLOBBER.include ['bin/*.exe']
+
+input = 'lackey2mse'
+args = "test/decks/programmingdeck.txt -f -n 'Programming deck' -c PRG -o test/files/prgd -l 'Feature:#666666;Bug:125,5,1'"
+# The directory convenience method is a short-hand for creating a FileTask that creates the directory
+directory 'bin'
+
+file "#{input}.exy" => ['bin', "lib/#{input}.rb"] do
+  Dir.chdir "lib"
+  unless File.exist?("#{input}.exy")
+    sh "mkexy #{input}.rb"
+  end
+end
+
+desc "Compiles to Windows EXE using Exerb"
+task :build => ["#{input}.exy"] do
+  sh "exerb --verbose #{input}.exy -o ../bin/#{input}.exe"
+  Dir.chdir "../"
+  # mv "#{input}.exe", "bin/#{input}.exe"  
+  # Dir.chdir File.dirname(__FILE__)
+end
+
+desc "Compiles to Windows executable using Ocra"
+task :build_ocra => ['bin'] do
+  rm 'bin/build_ocra.log' if File.exist?('bin/build_ocra.log')
+  sh "ocra --verbose lib/#{input}.rb --output bin/#{input}.exe >> bin/build_ocra.log"
+end
+
+desc "Compiles using Exerb and compresses the EXE file"
+task :release => [:build] do
+  sh "tools/upx bin/#{input}.exe"
+end
+
+desc "Basic Unit Testing"
+task :test do
+  ruby "lib/#{input}.rb #{args}"
+  
+  Rake::TestTask.new do |t|
+    t.test_files = FileList['test/test_*.rb']
+    t.options = "-v"
+    # t.verbose = true
+    t.warning = true
+  end
+end
+
+desc "Test executable"
+task :test_exe do
+  sh "bin/#{input}.exe #{args}"
+  
+  Rake::TestTask.new do |t|
+    t.test_files = FileList['test/test_output.rb']
+    t.options = "-v"
+    # t.verbose = true
+    t.warning = true
+  end
+end
