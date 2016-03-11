@@ -21,19 +21,7 @@ class TestOutput < Test::Unit::TestCase
   def test_file_contents
     set_file = nil
     Zip::File.open("#{@output_folder}#{@expected_file}") do |zip_file|
-      # Handle entries one by one
-      zip_file.each do |entry|
-        # Extract to file/directory/symlink
-        # puts "Extracting #{entry.name}"
-        # entry.extract(dest_file)
-
-        # Read into memory
-        # content = entry.get_input_stream.read
-      end
-
-      # Find specific entry
       set_file = zip_file.glob(@expected_file_entry).first
-      # puts entry.get_input_stream.read
     end
     
     assert_not_nil set_file, "Expected file '#{@expected_file_entry}' in '#{@expected_file}'"

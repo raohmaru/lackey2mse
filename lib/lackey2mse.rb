@@ -44,10 +44,10 @@ module Lackey_MSE2
       parse_args(argv)
       check_args
       create_set
-      write_files unless @set_info.dryrun
+      write_files
 
       puts "Found #{@set_info.num_cards} cards" + (@duplicated > 0 ? " (#{@duplicated} duplicated)" : "")
-      puts "Set '#{@zipname}' created\n" if @zipname
+      puts "Set '#{@zipname}' created\n" unless @set_info.dryrun
     end
 
     def parse_args(argv)
@@ -233,19 +233,27 @@ version control:
 apprentice code:
 
 EOF
+      output_folder = ''
+      output_file = ''
       if @set_info.output.nil?
-        @zipname = File.join(File.expand_path(File.dirname(@filename)), @set_info.name)
+        output_folder = File.dirname(@filename)
+        output_file = @set_info.name
       else
-        @zipname = @set_info.output
-        if File.directory?(@zipname)
-          @zipname = File.join(@zipname, @set_info.name)
+        if File.directory?(@set_info.output)
+          output_folder = @set_info.output
+          output_file = @set_info.name
+        else
+          output_folder = File.dirname(@set_info.output)
+          output_file = File.basename(@set_info.output)
         end
       end
+      output_file.gsub!(/[^0-9A-Za-z.\-]/, '_')  # Strip Invalid Characters from filenames
+      @zipname = File.join(output_folder, output_file)
       @zipname += '.mse-set' unless @zipname =~ /\.mse\-set$/
       # Overwrite file permissions
-      if File.exists?(@zipname)
+      if File.exists?(@zipname) && File.file?(@zipname)
         unless File.writable?(@zipname)
-          print_and_exit "File #{@zipname} is not writeable. Operation cancelled"
+          print_and_exit "ERROR: File #{@zipname} is not writeable. Operation cancelled"
         end
         if @set_info.force.nil?
           puts "\nFile '#{@zipname}' already exists."
@@ -257,14 +265,16 @@ EOF
         end
       end
       # Create or overwrite set file as a ZIP file
-      begin
-        Zip::File.open(@zipname, Zip::File::CREATE) do |zipfile|
-          zipfile.get_output_stream('set') do |output_entry_stream|
-            output_entry_stream.write buffer
+      unless @set_info.dryrun
+        begin
+          Zip::File.open(@zipname, Zip::File::CREATE) do |zipfile|
+            zipfile.get_output_stream('set') do |output_entry_stream|
+              output_entry_stream.write buffer
+            end
           end
+        rescue
+          print_and_exit "ERROR: Cannot create file #{@zipname}"
         end
-      rescue
-        print_and_exit "ERROR: Cannot create file #{@zipname}"
       end
     end
 
