@@ -24,7 +24,9 @@
 # SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #++
 
+# Avoids errors when requiring relative files and working dir is different 
 $LOAD_PATH.unshift(File.dirname(__FILE__)) unless defined? Exerb
+$LOAD_PATH << '.' if $Exerb  # In execution add current path to load relative files
 
 require 'card'
 require 'set'
