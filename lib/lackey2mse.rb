@@ -26,7 +26,7 @@
 
 # Avoids errors when requiring relative files and working dir is different 
 $LOAD_PATH.unshift(File.dirname(__FILE__)) unless defined? Exerb
-$LOAD_PATH << '.' if defined? $Exerb  # In execution adds current path to allow loading relative files
+$LOAD_PATH << '.' if defined? $Exerb || defined? Exerb  # In execution adds current path to allow loading relative files
 
 require 'card'
 require 'set'
@@ -35,7 +35,7 @@ require 'zip'
 
 module Lackey_MSE2
 
-  VERSION = "1.0.0"
+  VERSION = "1.0.1"
 
   class << self
   
