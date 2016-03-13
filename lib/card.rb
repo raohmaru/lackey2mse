@@ -27,13 +27,13 @@
 module Lackey_MSE2
   class Card
 
-    attr_reader :name, :supertype, :type, :subtype, :value, :rules, :flavor, :creator, :color
+    attr_reader :name, :supertype, :type, :subtype, :value, :rules, :flavor, :creator
 
     def initialize(raw, colors=nil)
       # Lackey columns:
       # 0:Name  1:Set  2:ImageFile  3:Type  4:CornerValue  5:Text  6:FlavorText  7:Creator
       raw = raw.split "\t"  # Split by tab char
-      type = raw[3].split /\s\-|\+\s/
+      type = raw[3].split(/\s\-|\+\s/)
 
       @name = raw[0].strip
       @supertype = type[0].strip
@@ -43,6 +43,7 @@ module Lackey_MSE2
       @rules = raw[5].strip
       @flavor = raw[6].nil? ? '' : raw[6].strip
       @creator = raw[7].nil? ? '' : raw[7].rstrip
+      @color = nil
       unless colors.nil?
         if colors[@subtype[0]]
            @color = colors[@subtype[0]]
