@@ -8,8 +8,8 @@ input = 'lackey2mse'
 banner = <<EOF
 resource:
   version:
-    file_version_number   : 1.0.1.0
-    product_version_number: 1.0.1
+    file_version_number   : 1.0.2.0
+    product_version_number: 1.0.2
     legal_copyright       : Copyright (c) 2016 Raohmaru
     product_name          : Lackey 2 MSE2
     file_description      : Lackey set to MSE2 set file converter

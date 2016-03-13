@@ -29,7 +29,7 @@ $LOAD_PATH.unshift(File.dirname(__FILE__)) unless defined? Exerb
 $LOAD_PATH << '.' if defined? $Exerb || defined? Exerb  # In execution adds current path to allow loading relative files
 
 require 'card'
-require 'set'
+require 'setinfo'
 require 'rubygems'
 require 'zip'
 
