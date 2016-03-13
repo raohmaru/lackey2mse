@@ -5,6 +5,17 @@ CLEAN.include ['bin/*.log', 'lib/*.exy', 'test/decks/*.mse-set', 'test/files/*.*
 CLOBBER.include ['bin/*.exe']
 
 input = 'lackey2mse'
+banner = <<EOF
+resource:
+  version:
+    file_version_number   : 1.0.1.0
+    product_version_number: 1.0.1
+    legal_copyright       : Copyright (c) 2016 Raohmaru
+    product_name          : Lackey 2 MSE2
+    file_description      : Lackey set to MSE2 set file converter
+    internal_name         : Lackey_MSE2
+    original_filename     : lackey2mse.exe
+EOF
 # The directory convenience method is a short-hand for creating a FileTask that creates the directory
 directory 'bin'
 
