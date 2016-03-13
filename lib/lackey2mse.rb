@@ -26,7 +26,7 @@
 
 # Avoids errors when requiring relative files and working dir is different 
 $LOAD_PATH.unshift(File.dirname(__FILE__)) unless defined? Exerb
-$LOAD_PATH << '.' if $Exerb  # In execution add current path to load relative files
+$LOAD_PATH << '.' if defined? $Exerb  # In execution adds current path to allow loading relative files
 
 require 'card'
 require 'set'
@@ -38,18 +38,24 @@ module Lackey_MSE2
   VERSION = "1.0.0"
 
   class << self
-
+  
     def init(argv)
+      @filename = nil
       @set_info = Set.new
       @duplicated = 0
+      @force = false
+      @dryrun = false
+      @silent = false
 
       parse_args(argv)
       check_args
       create_set
       write_files
 
-      puts "Found #{@set_info.num_cards} cards" + (@duplicated > 0 ? " (#{@duplicated} duplicated)" : "")
-      puts "Set '#{@zipname}' created\n" unless @set_info.dryrun
+      unless @silent
+        puts "Found #{@set_info.num_cards} cards" + (@duplicated > 0 ? " (#{@duplicated} duplicated)" : "")
+        puts "Set '#{@zipname}' created\n" unless @dryrun
+      end
     end
 
     def parse_args(argv)
@@ -81,6 +87,7 @@ Options:
     -v, --version       Display version number and exit.
     -f, --force         Overwrites output file without asking for permission
     -d, --dry-run       Run without generating the output file
+    -s, --silent        Runs without any message. Implies -f
 
 Set options:
 
@@ -102,9 +109,11 @@ EOF
             when /\A--output\z/, /\A-o\z/
               @set_info.output = argv.shift
             when /\A--force\z/, /\A-f\z/
-              @set_info.force = true
+              @force = true
             when /\A--dry-run\z/, /\A-d\z/
-              @set_info.dryrun = true
+              @dryrun = true
+            when /\A--silent\z/, /\A-s\z/
+              @silent = true
             when /\A--version\z/, /\A-v/
               print_version
             when /\A--help\z/, /\A-h/, /\A--./
@@ -249,7 +258,7 @@ EOF
           output_file = File.basename(@set_info.output)
         end
       end
-      output_file.gsub!(/[^0-9A-Za-z.\-]/, '_')  # Strip Invalid Characters from filenames
+      output_file.gsub!(/[^0-9A-Za-z.\-]/, '_')  # Strip invalid characters from filenames
       @zipname = File.join(output_folder, output_file)
       @zipname += '.mse-set' unless @zipname =~ /\.mse\-set$/
       # Overwrite file permissions
@@ -257,7 +266,7 @@ EOF
         unless File.writable?(@zipname)
           print_and_exit "ERROR: File #{@zipname} is not writeable. Operation cancelled"
         end
-        if @set_info.force.nil?
+        unless @silent || @force
           puts "\nFile '#{@zipname}' already exists."
           puts "Do you want to overwrite it? (Y/N)"
           overwrite = $stdin.gets.chomp.downcase
@@ -267,7 +276,7 @@ EOF
         end
       end
       # Create or overwrite set file as a ZIP file
-      unless @set_info.dryrun
+      unless @dryrun
         begin
           Zip::File.open(@zipname, Zip::File::CREATE) do |zipfile|
             zipfile.get_output_stream('set') do |output_entry_stream|
@@ -292,7 +301,7 @@ EOF
     end
 
     def print_and_exit(msg)
-      puts msg
+      puts msg unless @silent
       exit 0
     end
 

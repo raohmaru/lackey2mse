@@ -26,6 +26,6 @@
 
 module Lackey_MSE2
   class Set
-    attr_accessor :code, :name, :real_name, :num_cards, :colors, :output, :force, :dryrun
+    attr_accessor :code, :name, :real_name, :num_cards, :colors, :output
   end  # class Set
 end  # module Lackey_MSE2
