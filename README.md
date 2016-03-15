@@ -2,7 +2,7 @@
 
 A command line tool to convert Dvorak decks in Lackey format to a Magic Set Editor 2 set file.
 
-Find Dvorak decks at http://www.dvorakgame.co.uk/index.php/Main_Page
+Find Dvorak decks at http://www.dvorakgame.co.uk/index.php/Main_Page  
 Magic Set Editor 2 template: https://github.com/raohmaru/generic-mse2-template
 
 ## Usage
@@ -17,8 +17,9 @@ lackey2mse2 lackey.txt -f -o ../decks/mydeck
 ```
 
 Arguments:
-
-`FILE                Input file representing a set definition of an Dvorak deck in Lackey format`
+```
+FILE               Input file representing a set definition of an Dvorak deck in Lackey format`
+```
 
 Options:
 ```
@@ -26,6 +27,7 @@ Options:
 -v, --version       Display version number and exit.
 -f, --force         Overwrites output file without asking for permission
 -d, --dry-run       Run without generating the output file
+-s, --silent        Runs without any message. Implies -f
 ```
 
 Set options:
